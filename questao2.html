@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Pokemons Exemplo</title>
+<style>
+li {
+margin-bottom: 10px;
+}
+
+li button {
+font-size: 12px;
+margin-left: 20px;
+margin-top:  8px;
+color: #666;
+}
+div input {
+    color: #666;
+}
+</style>
+</head>
+<body>
+
+<h1><b> Meus Pokemons </b></h1>
+
+<div>
+<label for="item">Entre com um Novo Pokemon:</label>
+<input type="text" name="item" id="item" placeholder="insira o nome do pokemon" onclick="focusMethod()">
+<button type="button" name="" onclick="addpokemon();">Adicionar</button>
+</div>
+
+<ul id="lista">
+  
+</ul>
+<script>
+    var ul = document.getElementById("lista");
+var li;
+var itemid
+function addpokemon() {
+    if(document.getElementById("item").value != ""){
+
+        item   = document.getElementById("item");
+
+        itemId = ul.childElementCount;
+
+        li = createItemEl(item.value,itemId);
+        li.appendChild(createRemoveTaskBtn(itemId));
+        ul.appendChild(li);
+        item.value = "";
+    }
+}
+removeTask = function( itemId ){
+
+    for( i = 0 ; i < ul.children.length ; i++){
+
+        if(ul.children[i].getAttribute("index") == itemId ){
+
+            ul.children[i].remove();
+
+        }
+    }
+}
+createItemEl = function(itemValue, itemId){
+
+    let li = document.createElement("li");
+
+    li.setAttribute("index", itemId);
+
+    li.appendChild(document.createTextNode(itemValue));
+
+    return li;
+}
+createRemoveTaskBtn = function(itemId){
+    let btn =  document.createElement("button");
+    btn.setAttribute("onclick", "removeTask("+itemId+")"); 
+    btn.innerHTML ="remover";
+    return btn;
+}
+focusMethod = function getFocus() {           
+    document.getElementById("item").focus();
+  }
+</script>
+</body>
+</html>
